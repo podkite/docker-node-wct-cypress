@@ -12,17 +12,17 @@ RUN npm install cypress
 # Cypress
 RUN node_modules/cypress/bin/cypress install
 
-# WCT
-## install Java 8
+# # WCT
+# ## install Java 8
 RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | \
   tee /etc/apt/sources.list.d/webupd8team-java.list
 RUN echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | \
   tee -a /etc/apt/sources.list.d/webupd8team-java.list
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
-RUN get -qq update
-RUN  echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections
-RUN get install -y -qq oracle-java8-installer
-RUN get install -y -qq oracle-java8-set-default
+RUN apt-get -qq update
+RUN echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections
+RUN apt-get install -y -qq oracle-java8-installer
+RUN apt-get install -y -qq oracle-java8-set-default
 
 ## install chrome
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
