@@ -7,10 +7,10 @@ RUN which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y 
 RUN npm install -g polymer-cli --unsafe-perm=true
 RUN npm install -g bower --unsafe-perm=true
 RUN npm install -g firebase-tools
-RUN npm install -g cypress
+RUN npm install cypress
 
 # Cypress
-RUN cypress install
+RUN node_modules/cypress/bin/cypress install
 
 # WCT
 ## install Java 8
