@@ -4,3 +4,4 @@
 - web component tester
 - cypress
 - firebase-tools
+- eslint

@@ -1,4 +1,4 @@
-FROM cypress/base:8.15.1
+FROM cypress/base:8.16.0
 
 # install ssh-agent
 RUN which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
@@ -13,17 +13,15 @@ RUN npm install cypress
 # Cypress
 RUN node_modules/cypress/bin/cypress install
 
+### Update packages
+RUN apt-get update -yqqq
+
 # # WCT
 # ## install Java 8
-RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | \
-  tee /etc/apt/sources.list.d/webupd8team-java.list
-RUN echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | \
-  tee -a /etc/apt/sources.list.d/webupd8team-java.list
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
-RUN apt-get -qq update
-RUN echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections
-RUN apt-get install -y -qq oracle-java8-installer
-RUN apt-get install -y -qq oracle-java8-set-default
+RUN echo "deb [check-valid-until=no] http://cdn-fastly.deb.debian.org/debian jessie main" > /etc/apt/sources.list.d/jessie.list
+RUN echo "deb [check-valid-until=no] http://archive.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list
+RUN sed -i '/deb http:\/\/deb.debian.org\/debian jessie-updates main/d' /etc/apt/sources.list
+RUN apt-get -o Acquire::Check-Valid-Until=false update
 
 ## install chrome
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
