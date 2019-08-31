@@ -5,6 +5,7 @@ RUN which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y 
 
 # npm global deps
 RUN npm install -g polymer-cli --unsafe-perm=true
+RUN npm install -g yarn
 RUN npm install -g bower --unsafe-perm=true
 RUN npm install -g firebase-tools
 RUN npm install -g eslint
