@@ -1,4 +1,4 @@
-FROM cypress/base:8.16.0
+FROM cypress/base:10.16.0
 
 # install ssh-agent
 RUN which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
