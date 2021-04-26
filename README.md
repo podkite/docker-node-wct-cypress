@@ -1,7 +1,6 @@
 # docker-node-wct-cypress
 
-- npm, bower
-- web component tester
+- npm
 - cypress
 - firebase-tools
 - eslint
